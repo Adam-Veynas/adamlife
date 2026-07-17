@@ -8,18 +8,116 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-      padding: EdgeInsets.all(16),
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          AppCard(child: Text("Today's Tasks")),
-          SizedBox(height: 16),
-          AppCard(child: Text('Finance')),
-          SizedBox(height: 16),
-          AppCard(child: Text('Vehicle')),
+          Text(
+            'Good morning 👋',
+            style: textTheme.headlineSmall,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            _formatDate(DateTime.now()),
+            style: textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
+          ),
+          const SizedBox(height: 16),
+          AppCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text("Today's Tasks", style: textTheme.titleMedium),
+                const SizedBox(height: 12),
+                const Divider(height: 1),
+                const SizedBox(height: 12),
+                Text('No tasks for today', style: textTheme.bodyMedium),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          AppCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text('Finance', style: textTheme.titleMedium),
+                const SizedBox(height: 12),
+                const Divider(height: 1),
+                const SizedBox(height: 12),
+                Text('Balance', style: textTheme.bodyMedium),
+                const SizedBox(height: 8),
+                Text(
+                  '0 ₸',
+                  style: textTheme.headlineMedium,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          AppCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text('Vehicle', style: textTheme.titleMedium),
+                const SizedBox(height: 12),
+                const Divider(height: 1),
+                const SizedBox(height: 12),
+                Text('No vehicle added', style: textTheme.bodyMedium),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          AppCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text('Quick Actions', style: textTheme.titleMedium),
+                const SizedBox(height: 12),
+                const Divider(height: 1),
+                const SizedBox(height: 12),
+                OutlinedButton(
+                  onPressed: () {},
+                  child: const Text('+ Add Task'),
+                ),
+                const SizedBox(height: 8),
+                OutlinedButton(
+                  onPressed: () {},
+                  child: const Text('+ Add Expense'),
+                ),
+                const SizedBox(height: 8),
+                OutlinedButton(
+                  onPressed: () {},
+                  child: const Text('+ Add Vehicle'),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
   }
+}
+
+String _formatDate(DateTime date) {
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
+  return '${date.day} ${months[date.month - 1]} ${date.year}';
 }
